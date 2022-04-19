@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg" {
     prevent_destroy = true
   }
 
-  tags     = var.tags
+  tags = var.tags
 }
 
 resource "azurerm_management_lock" "rg" {
