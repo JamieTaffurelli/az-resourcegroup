@@ -1,22 +1,14 @@
 package test
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 
 	"github.com/elgs/gojq"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
-
-func getJsonMap(m map[string]interface{}, key string) map[string]interface{} {
-	raw := m[key]
-	sub, ok := raw.(map[string]interface{})
-	if !ok {
-		return nil
-	}
-	return sub
-}
 
 func TestUT_CanNotDeleteLockIsDeployed(t *testing.T) {
 	t.Parallel()
@@ -37,6 +29,9 @@ func TestUT_CanNotDeleteLockIsDeployed(t *testing.T) {
 
 	tfOptionsEmpty := &terraform.Options{}
 	planJSON, err := terraform.RunTerraformCommandAndGetStdoutE(t, tfOptions, terraform.FormatArgs(tfOptionsEmpty, "show", "-json", tfPlanOutput)...)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	parser, err := gojq.NewStringQuery(planJSON)
 	if err != nil {

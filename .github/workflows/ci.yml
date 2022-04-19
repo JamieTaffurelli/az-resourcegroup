@@ -35,10 +35,11 @@ jobs:
       working-directory: test/unit/
       run:  go get -v -t -d && go mod tidy
     
-    - name: golangci-lint
+    - name: Lint Unit Tests
       uses: golangci/golangci-lint-action@v3
       with:
         version: latest
+        working-directory: test/unit/
 
     - name: Terratest
       working-directory: test/unit/
