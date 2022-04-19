@@ -18,13 +18,13 @@ jobs:
         terraform_version: 1.1.8
     
     - name: Terraform Init
-      run: terrform init
+      run: terraform init
 
     - name: Terraform Validate
-      run: terrform validate
+      run: terraform validate
 
     - name: Terraform Format
-      run: terrform fmt -check -recursive
+      run: terraform fmt -check -recursive
   
     - name: Set up Go
       uses: actions/setup-go@v2
