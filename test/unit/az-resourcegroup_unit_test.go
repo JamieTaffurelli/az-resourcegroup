@@ -10,9 +10,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestUT_CanNotDeleteLockIsDeployed(t *testing.T) {
-	t.Parallel()
-
+func showTerraformPlanAsJSON(t *testing.T) *gojq.JQ {
 	tfOptions := &terraform.Options{
 		TerraformDir: "../../",
 		Vars: map[string]interface{}{
@@ -38,10 +36,30 @@ func TestUT_CanNotDeleteLockIsDeployed(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	lockType, err := parser.Query("configuration.root_module.resources.[0].expressions.lock_level.constant_value")
+	return parser
+}
+func TestUT_CanNotDeleteLockIsDeployed(t *testing.T) {
+	t.Parallel()
+
+	terraformJSON := showTerraformPlanAsJSON(t)
+
+	lockType, err := terraformJSON.Query("configuration.root_module.resources.[0].expressions.lock_level.constant_value")
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	assert.Equal(t, lockType, "CanNotDelete", "A CanNotDelete lock should be deployed to the resource group")
+}
+
+func TestUT_PreventDeletionIfContainsResourcesIsEnabled(t *testing.T) {
+	t.Parallel()
+
+	terraformJSON := showTerraformPlanAsJSON(t)
+
+	preventDelete, err := terraformJSON.Query("configuration.provider_config.azurerm.expressions.features.[0].resource_group.[0].prevent_deletion_if_contains_resources.constant_value")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assert.Equal(t, preventDelete, true, "Non-empty Resource Groups should be prvented from being deleted")
 }
