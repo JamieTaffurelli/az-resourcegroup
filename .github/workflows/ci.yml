@@ -4,6 +4,10 @@ on: pull_request
 
 concurrency: ci-${{ github.ref }}
 
+env:
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 jobs:
   validate:
     environment: deploy
@@ -40,11 +44,6 @@ jobs:
       with:
         version: latest
         working-directory: test/unit/
-
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.CREDS }}
 
     - name: Terratest
       working-directory: test/unit/
