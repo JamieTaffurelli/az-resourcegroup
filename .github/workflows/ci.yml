@@ -16,6 +16,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
@@ -50,3 +52,11 @@ jobs:
     - name: Terratest
       working-directory: test/unit/
       run: go test -v
+    
+    - uses: paulhatch/semantic-version@v4
+      with:
+        tag_prefix: "v"
+        major_pattern: "(MAJOR)"
+        minor_pattern: "(MINOR)"
+        format: "${major}.${minor}.${patch}"
+        bump_each_commit: false
