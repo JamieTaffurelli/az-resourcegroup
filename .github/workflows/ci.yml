@@ -56,8 +56,9 @@ jobs:
     - name: Version Modules
       uses: paulhatch/semantic-version@v4
       with:
-        tag_prefix: "v"
-        major_pattern: "(MAJOR)"
-        minor_pattern: "(MINOR)"
-        format: "${major}.${minor}.${patch}"
+        tag_prefix: v
+        major_pattern: (MAJOR)
+        minor_pattern: (MINOR)
+        format: ${major}.${minor}.${patch}
         bump_each_commit: false
+        change_path: az-resourcegroup.tf outputs.tf providers.tf variables.tf
