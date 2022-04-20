@@ -53,7 +53,7 @@ jobs:
       working-directory: test/unit/
       run: go test -v
     
-    - name: Version ModuleS
+    - name: Version Modules
       uses: paulhatch/semantic-version@v4
       with:
         tag_prefix: "v"
