@@ -1,5 +1,3 @@
-name: Testing new terraform code
-
 on: pull_request
 
 concurrency: ci-${{ github.ref }}
