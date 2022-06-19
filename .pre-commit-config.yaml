@@ -1,0 +1,17 @@
+repos:
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: 1.72.1
+  hooks:
+    - id: infracost_breakdown
+    - id: terraform_checkov
+    - id: terraform_docs
+    - id: terraform_fmt
+    - id: terraform_providers_lock
+    - id: terraform_tflint
+    - id: terraform_tfsec
+    - id: terraform_validate
+    - id: terraform_wrapper_module_for_each
+    - id: terragrunt_fmt
+    - id: terragrunt_validate
+    - id: terrascan
+
