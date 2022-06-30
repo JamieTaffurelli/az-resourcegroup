@@ -44,7 +44,7 @@ jobs:
     - name: Run pre-commit
       uses: pre-commit/action@v3.0.0
       with:
-        extra_args: -v
+        extra_args: -v --all-files
 
     - name: Setup Go Unit Test Dependencies
       working-directory: test/unit/
