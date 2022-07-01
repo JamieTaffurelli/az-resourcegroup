@@ -32,7 +32,7 @@ jobs:
       uses: actions/setup-python@v3
 
     - name: Set up Tflint
-      uses: lablabs/setup-tflint@v1
+      uses: lablabs/setup-tflint@v2
 
     - name: install packages
       run: |
