@@ -48,6 +48,12 @@ jobs:
       with:
         extra_args: -v --all-files
 
+    - name: Go Format
+      uses: Jerome1337/gofmt-action@v1.0.4
+      with:
+        gofmt-path: './'
+        gofmt-flags: '-l -d'
+
     - name: Setup Go Unit Test Dependencies
       working-directory: test/unit/
       run:  go get -v -t -d && go mod tidy
@@ -58,12 +64,6 @@ jobs:
         version: latest
         working-directory: test/unit/
 
-    - name: Go Format
-      uses: Jerome1337/gofmt-action@v1.0.4
-      with:
-        gofmt-path: './'
-        gofmt-flags: '-l -d'
-
-    - name: Terratest
+    - name: Terratest Unit Tests
       working-directory: test/unit/
       run: go test -v
