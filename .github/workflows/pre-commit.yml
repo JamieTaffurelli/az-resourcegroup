@@ -34,7 +34,7 @@ jobs:
         python-version: '3.x'
 
     - name: Set up Tflint
-      uses: lablabs/setup-tflint@v2
+      uses: lablabs/setup-tflint@v3
 
     - name: install packages
       run: |
