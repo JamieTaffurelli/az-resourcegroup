@@ -49,7 +49,7 @@ jobs:
         extra_args: -v --all-files
 
     - name: Go Format
-      uses: Jerome1337/gofmt-action@v1.0.4
+      uses: Jerome1337/gofmt-action@v1.0.5
       with:
         gofmt-path: './'
         gofmt-flags: '-l -d'
